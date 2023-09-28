@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Line Chart</title>
+    <style>
+        #myCanvas {
+            border: 1px solid rgb(138, 235, 156);
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="400" height="200"></canvas>
+
+    <script>
+        function createLineChart(data) {
+            const canvas = document.getElementById('myCanvas');
+            const ctx = canvas.getContext('2d');
+
+            const maxY = Math.max(...data.map(point => point.y));
+            const scaleY = canvas.height / maxY;
+
+            ctx.beginPath();
+            ctx.moveTo(data[0].x, canvas.height - data[0].y * scaleY);
+
+            for (let i = 1; i < data.length; i++) {
+                const x = data[i].x;
+                const y = canvas.height - data[i].y * scaleY;
+                ctx.lineTo(x, y);
+            }
+
+            ctx.strokeStyle = 'blue';
+            ctx.fillStyle = 'blue';
+            ctx.lineWidth = 2;
+            ctx.fill();
+        }
+
+    
+        const data = [
+            { x: 0, y: 100 },
+            { x: 60, y: 100 },
+            { x: 100, y: 200 },
+            { x: 250, y: 200 },
+            { x: 300, y: 140 },
+            { x: 320, y: 100 },
+            { x: 450, y: 100 },
+            { x: 450, y: 80 },
+            { x: 0, y: 80 },
+            { x: 0, y: 100 }
+
+        ];
+
+
+        createLineChart(data);
+    </script>
+</body>
+
+</html>
+
+    
